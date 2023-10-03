@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Customer" ALTER COLUMN "balance" SET DEFAULT '0',
+ALTER COLUMN "balance" SET DATA TYPE TEXT,
+ALTER COLUMN "contact" SET DATA TYPE TEXT;
