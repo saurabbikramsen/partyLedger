@@ -12,10 +12,9 @@
 
 - Copy the variables in example.env to .env file
 - Install and run postgres in docker,
-    - use your own username, password, and set port to 5432
-
-- Install and run redis in docker in appropriate port.
-
+- Use the reference docker-compose.yml file for running postgres in docker.
+  - use code $ docker compose up -d
+  - use your own username, password, and set port to 5432
 - In the env file
     - For DATABASE_URL variable, Change the username, password, as your postgres setup  and provide a dbname.
     - Set your 'ACCESS_TOKEN_SECRET' AND 'REFRESH_TOKEN_SECRET'
@@ -69,19 +68,4 @@
   $ yarn start:prod
 ```
 
-
-
-
-
-## Test
-
-```bash
-  # unit tests
-  $ yarn run test
-```
-
-```bash
-  # e2e tests
-  $ yarn run test:e2e
-```
 
