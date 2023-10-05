@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { TransactionDto } from '../../transaction/Dto/transaction.dto';
+import { TransactionDto } from '../../khata_transaction/Dto/transaction.dto';
 
 export class CustomerDto {
   @ApiProperty()

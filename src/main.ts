@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as process from 'process';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,9 +14,13 @@ async function bootstrap() {
     .setVersion('1.0')
     .setDescription('A simple and Easy to Use Party Ledger')
     .addTag('Khata')
+    .addBearerAuth()
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(8888);
+  await app.listen(process.env.PORT);
 }
-bootstrap();
+const startMessage = `server is listening on port ${process.env.PORT}`;
+
+bootstrap().then(() => console.log(startMessage));

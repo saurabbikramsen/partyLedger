@@ -1,39 +1,32 @@
-import { PaymentState } from '../../Enums/enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class TransactionDto {
+export class MoneyTransactionDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  item: string;
+  customerId: string;
 
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  unitPrice: number;
-
+  amount: number;
+}
+export class MoneyTransactionUpdateDto {
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  quantity: number;
+  amount: number;
+}
 
+export class MoneyTransactionGetResponse {
   @ApiProperty()
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  totalPrice: number;
+  customerName: string;
 
   @ApiProperty()
   @IsString()
-  status: PaymentState;
-
-  @ApiProperty()
-  @IsNumber()
   @IsNotEmpty()
-  paidPrice: number;
-
-  @ApiProperty()
-  @IsNumber()
-  @IsNotEmpty()
-  remainingPrice: number;
+  amount: number;
 }

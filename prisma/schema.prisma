@@ -10,31 +10,50 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Admin {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  email    String
+  password String
+}
+
 model Customer {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String
-  email       String        @unique
-  contact     BigInt
-  address     String
-  balance     BigInt        @default(0)
-  Transaction Transaction[]
+  name             String
+  email            String             @unique
+  contact          String
+  address          String
+  balance          Int                @default(0)
+  Transaction      KhataTransaction[]
+  MoneyTransaction MoneyTransaction[]
 }
 
-model Transaction {
+model KhataTransaction {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  item           String
-  unitPrice      Float
-  quantity       Int
-  totalPrice     BigInt
-  paidPrice      Int
-  remainingPrice Int
-  status         String
+  item       String
+  unitPrice  Float
+  quantity   Int
+  totalPrice Int
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+}
+
+model MoneyTransaction {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  amount Int
 
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId String
