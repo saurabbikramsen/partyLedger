@@ -6,26 +6,19 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   TransactionDto,
   TransactionGetResponse,
   TransactionUpdateDto,
 } from './Dto/transaction.dto';
 import { ResponseDto } from '../customer/Dto/customer.dto';
-import { AdminAuthGuard } from '../guards/admin.auth.guard';
 
 @ApiTags('Transactions')
-@ApiBearerAuth()
-@UseGuards(AdminAuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(AdminAuthGuard)
 @Controller('transaction')
 export class TransactionController {
   constructor(private transactionService: TransactionService) {}

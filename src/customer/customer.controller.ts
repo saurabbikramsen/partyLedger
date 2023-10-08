@@ -6,7 +6,6 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import {
@@ -15,17 +14,11 @@ import {
   CustomerUpdateDto,
   ResponseDto,
 } from './Dto/customer.dto';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
-import { AdminAuthGuard } from '../guards/admin.auth.guard';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Customer')
-@ApiBearerAuth()
-@UseGuards(AdminAuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(AdminAuthGuard)
 @Controller('customer')
 export class CustomerController {
   constructor(private customerService: CustomerService) {}

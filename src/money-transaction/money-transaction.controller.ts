@@ -6,14 +6,8 @@ import {
   Param,
   Post,
   Put,
-  UseGuards,
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseDto } from '../customer/Dto/customer.dto';
 
 import { MoneyTransactionService } from './money-transaction.service';
@@ -22,11 +16,10 @@ import {
   MoneyTransactionGetResponse,
   MoneyTransactionUpdateDto,
 } from './Dto/moneyTransaction.dto';
-import { AdminAuthGuard } from '../guards/admin.auth.guard';
 
 @ApiTags('MoneyTransaction')
-@ApiBearerAuth()
-@UseGuards(AdminAuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(AdminAuthGuard)
 @Controller('money-moneyTransaction')
 export class MoneyTransactionController {
   constructor(private moneyTransactionService: MoneyTransactionService) {}

@@ -13,10 +13,10 @@
 - Copy the variables in example.env to .env file
 - Install and run postgres in docker,
 - Use the reference docker-compose.yml file for running postgres in docker.
+  - use your own username, password, and set port to 5432:5432
   - use code $ docker compose up -d
-  - use your own username, password, and set port to 5432
 - In the env file
-    - For DATABASE_URL variable, Change the username, password, as your postgres setup  and provide a dbname.
+    - For DATABASE_URL variable, Change the username, password, and port as your postgres setup  and provide a dbname.
     - Set your 'ACCESS_TOKEN_SECRET' AND 'REFRESH_TOKEN_SECRET'
     - provide expiry time for access and refresh token
     - Set an appropriate port number for nest-app
