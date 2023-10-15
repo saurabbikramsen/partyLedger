@@ -64,8 +64,14 @@ export class TransactionService {
   }
 
   async deleteTransaction(id: string) {
-    await this.getTransaction(id);
+    const transaction = await this.getTransaction(id);
+    const balance = transaction.customer.balance;
+
     await this.prisma.khataTransaction.delete({ where: { id } });
+    await this.prisma.customer.update({
+      where: { id: transaction.customer.id },
+      data: { balance: balance - transaction.totalPrice },
+    });
     return { message: 'Khata Transaction Deleted Successfully' };
   }
 }

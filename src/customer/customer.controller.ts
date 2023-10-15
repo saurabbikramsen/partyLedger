@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import {
@@ -14,7 +15,7 @@ import {
   CustomerUpdateDto,
   ResponseDto,
 } from './Dto/customer.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Customer')
 // @ApiBearerAuth()
@@ -43,9 +44,10 @@ export class CustomerController {
     summary: 'Gets all the Customer',
   })
   @ApiResponse({ type: [CustomerDto] })
+  @ApiQuery({ name: 'searchKey', required: false, type: String })
   @Get()
-  getAll() {
-    return this.customerService.getAllCustomers();
+  getAll(@Query('searchKey') searchKey = '') {
+    return this.customerService.getAllCustomers(searchKey);
   }
   @ApiOperation({
     summary: 'Updates an Existing Customer',

@@ -20,7 +20,7 @@ import {
 @ApiTags('MoneyTransaction')
 // @ApiBearerAuth()
 // @UseGuards(AdminAuthGuard)
-@Controller('money-moneyTransaction')
+@Controller('moneyTransaction')
 export class MoneyTransactionController {
   constructor(private moneyTransactionService: MoneyTransactionService) {}
 

@@ -61,7 +61,12 @@ export class MoneyTransactionService {
     return { message: 'Money Transaction Updated Successfully' };
   }
   async deleteMoneyTransaction(id: string) {
-    await this.getMoneyTransaction(id);
+    const moneyTransaction = await this.getMoneyTransaction(id);
+    const balance = moneyTransaction.customer.balance;
     await this.prisma.moneyTransaction.delete({ where: { id } });
+    await this.prisma.customer.update({
+      where: { id: moneyTransaction.customer.id },
+      data: { balance: balance + moneyTransaction.amount },
+    });
   }
 }

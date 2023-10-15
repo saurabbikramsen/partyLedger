@@ -12,9 +12,9 @@
 
 - Copy the variables in example.env to .env file
 - Install and run postgres in docker,
-- Use the reference docker-compose.yml file for running postgres in docker.
-  - use your own username, password, and set port to 5432:5432
-  - use code $ docker compose up -d
+  - Use the reference docker-compose.yml file for running postgres in docker.
+    - use your own username, password, and set port to 5432:5432
+    - use code $ docker compose up -d
 - In the env file
     - For DATABASE_URL variable, Change the username, password, and port as your postgres setup  and provide a dbname.
     - Set your 'ACCESS_TOKEN_SECRET' AND 'REFRESH_TOKEN_SECRET'

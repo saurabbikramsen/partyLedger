@@ -52,7 +52,7 @@ export class CustomerUpdateDto {
   address: string;
 
   @ApiProperty()
-  @IsNumber()
+  @IsString()
   @IsOptional()
   @IsNotEmpty()
   contact: string;

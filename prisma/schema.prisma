@@ -30,8 +30,8 @@ model Customer {
   contact          String
   address          String
   balance          Int                @default(0)
-  Transaction      KhataTransaction[]
-  MoneyTransaction MoneyTransaction[]
+  khataTransaction KhataTransaction[]
+  moneyTransaction MoneyTransaction[]
 }
 
 model KhataTransaction {
@@ -44,7 +44,7 @@ model KhataTransaction {
   quantity   Int
   totalPrice Int
 
-  customer   Customer @relation(fields: [customerId], references: [id])
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String
 }
 
@@ -55,6 +55,6 @@ model MoneyTransaction {
 
   amount Int
 
-  customer   Customer @relation(fields: [customerId], references: [id])
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String
 }

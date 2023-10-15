@@ -34,6 +34,29 @@ export class CommonUtils {
     });
   }
 
+  paginatedResponse(data: any, skip: number, take: number, count: number) {
+    return {
+      data: data,
+      meta: {
+        totalItems: count,
+        itemsPerPage: take,
+        currentPage: skip == 0 ? 1 : skip / take + 1,
+        totalPages: Math.ceil(count / take),
+        hasNextPage: count - skip != take && count > take,
+        hasPreviousPage: skip >= take,
+      },
+      links: {
+        first: `/player?page=1&pageSize=${take}`,
+        prev: skip == 0 ? null : `/vendor?page=${skip / take}&pageSize=${take}`,
+        next:
+          count - skip != take && count > take
+            ? `/player?page=${skip / take + 2}&pageSize=${take}`
+            : null,
+        last: `/player?page=${Math.ceil(count / take)}&pageSize=${take}`,
+      },
+    };
+  }
+
   async passwordMatches(userPassword: string, inputPassword: string) {
     const pwMatches = await argon.verify(userPassword, inputPassword);
     if (!pwMatches) {

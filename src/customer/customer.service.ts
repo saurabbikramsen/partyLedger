@@ -5,10 +5,14 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CustomerDto, CustomerUpdateDto } from './Dto/customer.dto';
+import { CommonUtils } from '../utils/common.utils';
 
 @Injectable()
 export class CustomerService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private utils: CommonUtils,
+  ) {}
 
   async getCustomer(id: string) {
     const customer = await this.prisma.customer.findUnique({
@@ -18,16 +22,38 @@ export class CustomerService {
         email: true,
         address: true,
         balance: true,
+        createdAt: true,
+        contact: true,
         id: true,
-        Transaction: true,
+        khataTransaction: true,
+        moneyTransaction: true,
       },
     });
     if (!customer) throw new NotFoundException('Customer Not Found');
     return customer;
   }
 
-  async getAllCustomers() {
-    return this.prisma.customer.findMany();
+  async getAllCustomers(search: string) {
+    const customers = await this.prisma.customer.findMany({
+      where: { name: { contains: search, mode: 'insensitive' } },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        address: true,
+        contact: true,
+        createdAt: true,
+        balance: true,
+        moneyTransaction: true,
+        khataTransaction: true,
+      },
+    });
+    const count = await this.prisma.customer.count({
+      where: {
+        name: { contains: search, mode: 'insensitive' },
+      },
+    });
+    return this.utils.paginatedResponse(customers, 0, 10, count);
   }
   async addCustomer(customerDetails: CustomerDto) {
     const customer = await this.prisma.customer.findUnique({
