@@ -53,6 +53,8 @@ export class CustomerService {
         name: { contains: search, mode: 'insensitive' },
       },
     });
+    console.log('this is log :  ' ,0)
+    if (!count) throw new NotFoundException('no data present')
     return this.utils.paginatedResponse(customers, 0, 10, count);
   }
   async addCustomer(customerDetails: CustomerDto) {
